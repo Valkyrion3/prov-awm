@@ -6,6 +6,9 @@ import './styles/main.scss';
 import './styles/categorias.scss';
 import './styles/layout.scss';
 import './styles/dashboard.scss';
+import './styles/piezas.scss';
+import './styles/proveedores.scss';
+import './styles/suministros.scss';
 
 const queryClient = new QueryClient();
 
