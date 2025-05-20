@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://127.0.0.1:8000/api', // URL base de la API
+  baseURL: 'http://provmc.42web.io/api', // URL base de la API
   headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json'
