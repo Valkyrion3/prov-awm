@@ -37,7 +37,11 @@ export default function ProveedoresPage() {
               <td>{proveedor.numero}</td>
               <td>{proveedor.ciudad}</td>
               <td>{proveedor.provincia}</td>
-              <td>{proveedor.estado}</td>
+              <td>
+                <span className={`status-badge ${proveedor.estado === 1 ? 'active' : 'completed'}`}>
+                    {proveedor.estado ? 'Activo' : 'Inactivo'}
+                  </span>
+              </td>
             </tr>
           ))}
         </tbody>
@@ -45,21 +49,25 @@ export default function ProveedoresPage() {
 
       {/* Paginación */}
       {data.pagination && (
-        <div className="pagination">
+        <div className="pagination-controls">
           <button 
             onClick={() => setPage(p => Math.max(1, p - 1))} 
             disabled={page === 1}
+            className="pagination-btn"
           >
-            Anterior
+            &laquo; Anterior
           </button>
           
-          <span>Página {data.pagination.current_page} de {data.pagination.last_page}</span>
+          <span className="page-info">
+            Página {data.pagination.current_page} de {data.pagination.last_page}
+          </span>
           
           <button 
             onClick={() => setPage(p => p + 1)} 
             disabled={page === data.pagination.last_page}
+            className="pagination-btn"
           >
-            Siguiente
+            Siguiente &raquo;
           </button>
         </div>
       )}

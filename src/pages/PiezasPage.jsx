@@ -22,9 +22,9 @@ export default function PiezasPage() {
             <th>ID</th>
             <th>Nombre</th>
             <th>Categoría</th>
-            <th>Descripción</th>
             <th>Precio</th>
             <th>Stock</th>
+            <th>Estado</th>
           </tr>
         </thead>
         <tbody>
@@ -33,9 +33,13 @@ export default function PiezasPage() {
               <td>{pieza.idPieza}</td>
               <td>{pieza.nombre}</td>
               <td>{pieza.categoria}</td>
-              <td>{pieza.descripcion}</td>
               <td>${pieza.precio.toFixed(2)}</td>
               <td>{pieza.stock}</td>
+              <td>
+                <span className={`status-badge ${pieza.estado === 1 ? 'active' : 'completed'}`}>
+                    {pieza.estado ? 'Activo' : 'Inactivo'}
+                  </span>
+              </td>
             </tr>
           ))}
         </tbody>
@@ -43,21 +47,25 @@ export default function PiezasPage() {
 
       {/* Paginación */}
       {data.pagination && (
-        <div className="pagination">
+        <div className="pagination-controls">
           <button 
             onClick={() => setPage(p => Math.max(1, p - 1))} 
             disabled={page === 1}
+            className="pagination-btn"
           >
-            Anterior
+            &laquo; Anterior
           </button>
           
-          <span>Página {data.pagination.current_page} de {data.pagination.last_page}</span>
+          <span className="page-info">
+            Página {data.pagination.current_page} de {data.pagination.last_page}
+          </span>
           
           <button 
             onClick={() => setPage(p => p + 1)} 
             disabled={page === data.pagination.last_page}
+            className="pagination-btn"
           >
-            Siguiente
+            Siguiente &raquo;
           </button>
         </div>
       )}

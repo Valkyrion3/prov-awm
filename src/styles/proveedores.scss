@@ -1,22 +1,42 @@
+@use 'sass:color';
+
+$accent-color: #3498db;
+
+:root {
+  --primary: #2c3e50;
+  --accent: #3498db;
+  --bg-light: #f9f9f9;
+  --text-dark: #333;
+  --text-light: #fff;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --disabled: #adb5bd;
+}
+
 .proveedores-container {
-  padding: 20px;
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 1rem;
 
   .proveedores-table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 2rem;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
 
-    th, td {
-      padding: 12px 15px;
+    th,
+    td {
+      padding: 1rem 1.2rem;
       text-align: left;
       border-bottom: 1px solid #e0e0e0;
     }
 
     th {
-      background-color: #4361ee;
-      color: white;
-      font-weight: 500;
+      background-color: var(--bg-light);
+      color: var(--text-dark);
+      font-weight: 600;
     }
 
     tr:nth-child(even) {
@@ -24,42 +44,58 @@
     }
 
     tr:hover {
-      background-color: #e9ecef;
+      background-color: #f0f8ff;
     }
   }
 
-  .pagination {
+  .status-badge {
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: inline-block;
+
+      &.active {
+        background-color: #d4edda;
+        color: #155724;
+      }
+
+      &.completed {
+        background-color: #f8d7da;
+        color: #721c24;
+      }
+    }
+    
+  .pagination-controls {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 15px;
-    margin-top: 25px;
-    padding: 10px;
-    background-color: #f8f9fa;
-    border-radius: 6px;
+    margin-top: 2rem;
+    gap: 1rem;
 
-    button {
-      padding: 8px 16px;
-      background-color: #4361ee;
-      color: white;
+    .pagination-btn {
+      padding: 0.6rem 1.2rem;
+      background-color: var(--accent);
+      color: var(--text-light);
       border: none;
-      border-radius: 4px;
+      border-radius: 8px;
       cursor: pointer;
-      transition: background-color 0.2s;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
 
       &:hover:not(:disabled) {
-        background-color: #3a56d4;
+        background-color: color.adjust($accent-color, $lightness: -10%);
       }
 
       &:disabled {
-        background-color: #adb5bd;
+        background-color: var(--disabled);
         cursor: not-allowed;
       }
     }
 
-    span {
+    .page-info {
       font-size: 0.9rem;
-      color: #495057;
+      color: var(--text-dark);
     }
   }
 }
