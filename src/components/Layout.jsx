@@ -45,7 +45,7 @@ export default function Layout() {
             <Link to="/suministros">Suministros</Link>
           </li>
           <li>
-            <button 
+            <button
               onClick={() => {
                 localStorage.removeItem('auth_token');
                 navigate('/login');

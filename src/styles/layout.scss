@@ -1,6 +1,6 @@
 // Variables de colores
-$primary-color: #d81515;
-$secondary-color: #cc700e;
+$primary-color: #440054;
+$secondary-color: #000000;
 $background-light: #f8f9fa;
 $text-dark: #212529;
 $text-light: #f8f9fa;
@@ -15,7 +15,7 @@ $sidebar-width: 280px;
   // Barra lateral
   .sidebar {
     width: $sidebar-width;
-    background: linear-gradient(135deg, $primary-color, $secondary-color);
+    background: linear-gradient(180deg, $primary-color, $secondary-color);
     color: $text-light;
     padding: 0;
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);

@@ -11,6 +11,7 @@ $view-color: #6c757d;
   --danger: #e74c3c;
   --warning: #ffc107;
   --bg-light: #f9f9f9;
+  --bg-dark: #440054;
   --text-dark: #333;
   --text-light: #fff;
   --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -48,9 +49,9 @@ $view-color: #6c757d;
     }
 
     th {
-      background-color: var(--bg-light);
-      color: var(--primary);
-      font-weight: 600;
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+      font-weight: bold;
       position: sticky;
       top: 0;
       z-index: 1;

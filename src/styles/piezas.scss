@@ -6,6 +6,7 @@ $accent-color: #3498db; // color base para manipulación Sass
   --primary: #2c3e50;
   --accent: #3498db;
   --bg-light: #f9f9f9;
+  --bg-dark: #440054;
   --text-dark: #333;
   --text-light: #fff;
   --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -34,9 +35,9 @@ $accent-color: #3498db; // color base para manipulación Sass
     }
 
     th {
-      background-color: var(--bg-light);
-      font-weight: 600;
-      color: var(--primary);
+      background-color: var(--bg-dark);
+      font-weight: bold;
+      color: var(--text-light);
     }
 
     tr:hover {

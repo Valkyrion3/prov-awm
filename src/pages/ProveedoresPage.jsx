@@ -14,7 +14,7 @@ export default function ProveedoresPage() {
 
   return (
     <div className="proveedores-container">
-      <h1>Listado de Proveedores</h1>
+      <h1>Proveedores</h1>
       
       <table className="proveedores-table">
         <thead>

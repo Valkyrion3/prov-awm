@@ -6,6 +6,7 @@ $accent-color: #3498db;
   --primary: #2c3e50;
   --accent: #3498db;
   --bg-light: #f9f9f9;
+  --bg-dark: #440054;
   --text-dark: #333;
   --text-light: #fff;
   --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -16,6 +17,10 @@ $accent-color: #3498db;
   max-width: 1000px;
   margin: 2rem auto;
   padding: 1rem;
+
+  h1 {
+    text-align: left;
+  }
 
   .proveedores-table {
     width: 100%;
@@ -34,9 +39,9 @@ $accent-color: #3498db;
     }
 
     th {
-      background-color: var(--bg-light);
-      color: var(--text-dark);
-      font-weight: 600;
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+      font-weight: bold;
     }
 
     tr:nth-child(even) {
@@ -65,7 +70,7 @@ $accent-color: #3498db;
         color: #721c24;
       }
     }
-    
+
   .pagination-controls {
     display: flex;
     justify-content: center;
