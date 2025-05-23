@@ -6,6 +6,11 @@ import SuministrosPage from './pages/SuministrosPage';
 import ProveedoresPage from './pages/ProveedoresPage';
 import DashboardPage from './pages/DashboardPage';
 import Layout from './components/Layout';
+import CategoryForm from './pages/CategoryForm';
+import PiezaForm from './pages/PiezaForm';
+import ProviderForm from './pages/ProviderForm';
+import SuministrosForm from './pages/SuministrosForm';
+
 
 function App() {
   return (
@@ -14,9 +19,17 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/" element={<Layout />}>
           <Route path="/categorias" element={<CategoriesPage />} />
+          <Route path="/categorias/nueva" element={<CategoryForm />} />
+          <Route path="/categorias/editar/:id" element={<CategoryForm />} />
+          <Route path="/piezas/nueva" element={<PiezaForm />} />
+          <Route path="/piezas/editar/:id" element={<PiezaForm />} />
           <Route path="/piezas" element={<PiezasPage />} />
           <Route path="/proveedores" element={<ProveedoresPage />} />
+          <Route path="/proveedores/nuevo" element={<ProviderForm />} />
+          <Route path="/proveedores/editar/:id" element={<ProviderForm />} />
           <Route path="/suministros" element={<SuministrosPage />} />
+          <Route path="/suministros/nuevo" element={<SuministrosForm />} />
+          <Route path="/suministros/editar/:id" element={<SuministrosForm />} />
           <Route path="/dashboard" element={<DashboardPage />} />
         </Route>
       </Routes>

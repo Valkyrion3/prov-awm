@@ -1,121 +1,46 @@
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { getCategories, createCategory, updateCategory } from '../api/categories';
-import { useForm } from 'react-hook-form';
+import { useQuery } from '@tanstack/react-query';
+import { getCategories } from '../api/categories';
+import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
 export default function CategoriesPage() {
-  const queryClient = useQueryClient();
-  const [editingId, setEditingId] = useState(null);
+  const navigate = useNavigate();
+  const [currentPage, setCurrentPage] = useState(1);
   
-  // Formulario para creación/edición
-  const { 
-    register, 
-    handleSubmit, 
-    reset,
-    setValue,
-    formState: { errors } 
-  } = useForm();
-  
-  // Obtener categorías
-  const { data: categories, isLoading, isError } = useQuery({
-    queryKey: ['categories'],
-    queryFn: getCategories
+  // Modificamos la query para aceptar parámetros de paginación
+  const { data: response, isLoading, isError } = useQuery({
+    queryKey: ['categories', currentPage],
+    queryFn: () => getCategories(currentPage), // Pasamos la página actual
   });
 
-  
-  // Mutación para crear categoría
-  const createMutation = useMutation({
-    mutationFn: createCategory,
-    onSuccess: () => {
-      reset();
-      queryClient.invalidateQueries(['categories']);
-    }
-  });
-  
-  // Mutación para actualizar categoría
-  const updateMutation = useMutation({
-    mutationFn: ({ idCategoria, data }) => updateCategory(idCategoria, data),
-    onSuccess: () => {
-      reset();
-      setEditingId(null);
-      queryClient.invalidateQueries(['categories']);
-    }
-  });
-  
-  // Manejar edición
-  const handleEdit = (category) => {
-    setEditingId(category.idCategoria);
-    setValue('nombre', category.nombre);
-    setValue('estado', category.estado);
+  if (isLoading) return <p>Cargando categorías...</p>;
+  if (isError) return <p>Error al cargar las categorías</p>;
+
+  // Extraemos los datos y la paginación de la respuesta
+  const categories = response?.data || [];
+  const pagination = response?.pagination || {
+    total: 0,
+    pages: 1,
+    currentPage: 1,
+    perPage: 7
   };
-  
-  // Enviar formulario
-  const onSubmit = (data) => {
-    if (editingId) {
-      updateMutation.mutate({ idCategoria: editingId, data });
-    } else {
-      createMutation.mutate(data);
-    }
-  };
-  
-  if (isLoading) return <div>Cargando categorías...</div>;
-  if (isError) return <div>Error al cargar categorías</div>;
 
   return (
     <div className="categories-page">
-      <h1>Gestión de Categorías</h1>
-      
-      {/* Formulario */}
-      <form onSubmit={handleSubmit(onSubmit)} className="category-form">
-        <div className="form-group">
-          <label>Nombre</label>
-          <input 
-            {...register('nombre', { required: 'Nombre es requerido' })}
-            className={errors.nombre ? 'error' : ''}
-          />
-          {errors.nombre && <span className="error-message">{errors.nombre.message}</span>}
-        </div>
-        
-        <div className="form-group">
-          <label>Estado</label>
-          <select {...register('estado')}>
-            <option value={1}>Activo</option>
-            <option value={0}>Inactivo</option>
-          </select>
-        </div>
-        
-        <button type="submit" disabled={createMutation.isLoading || updateMutation.isLoading}>
-          {editingId ? 'Actualizar' : 'Crear'} Categoría
-        </button>
-        
-        {editingId && (
-          <button 
-            type="button" 
-            onClick={() => {
-              setEditingId(null);
-              reset();
-            }}
-            className="cancel-button"
-          >
-            Cancelar
-          </button>
-        )}
-        
-        {(createMutation.isError || updateMutation.isError) && (
-          <div className="error-message">
-            {createMutation.error?.message || updateMutation.error?.message}
-          </div>
-        )}
-        
-        {(createMutation.isSuccess || updateMutation.isSuccess) && (
-          <div className="success-message">
-            {createMutation.isSuccess ? 'Categoría creada!' : 'Categoría actualizada!'}
-          </div>
-        )}
-      </form>
-      
-      {/* Tabla de categorías */}
+      <div className="category-form">
+      </div>
+
       <div className="categories-table">
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-2xl font-bold">Categorías</h2>
+          <button
+            onClick={() => navigate('/categorias/nueva')}
+            className="button"
+          >
+            + Nueva Categoría
+          </button>
+        </div>
+
         <table>
           <thead>
             <tr>
@@ -126,20 +51,18 @@ export default function CategoriesPage() {
             </tr>
           </thead>
           <tbody>
-            {categories
-            .filter(category => category.estado === true)
-            .map(category => (
-              <tr key={category.idCategoria}>
-                <td>{category.idCategoria}</td>
-                <td>{category.nombre}</td>
+            {categories.map((cat) => (
+              <tr key={cat.idCategoria}>
+                <td>{cat.idCategoria}</td>
+                <td>{cat.nombre}</td>
                 <td>
-                  <span className={`status ${category.estado ? 'active' : 'inactive'}`}>
-                    {category.estado ? 'Activo' : 'Inactivo'}
+                  <span className={`status ${cat.estado ? 'active' : 'inactive'}`}>
+                    {cat.estado ? 'Activo' : 'Inactivo'}
                   </span>
                 </td>
                 <td>
-                  <button 
-                    onClick={() => handleEdit(category)}
+                  <button
+                    onClick={() => navigate(`/categorias/editar/${cat.idCategoria}`)}
                     className="edit-button"
                   >
                     Editar
@@ -149,6 +72,35 @@ export default function CategoriesPage() {
             ))}
           </tbody>
         </table>
+        
+        {/* Paginación usando la información del backend */}
+        {pagination.pages > 1 && (
+          <div className="pagination">
+            <button
+              onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+              disabled={currentPage === 1}
+            >
+              Anterior
+            </button>
+            
+            {Array.from({ length: pagination.pages }, (_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentPage(index + 1)}
+                className={`page-button ${currentPage === index + 1 ? 'active' : ''}`}
+              >
+                {index + 1}
+              </button>
+            ))}
+            
+            <button
+              onClick={() => setCurrentPage(prev => Math.min(prev + 1, pagination.pages))}
+              disabled={currentPage === pagination.pages}
+            >
+              Siguiente
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -7,7 +7,7 @@ export default function DashboardPage() {
       </header>
 
       <div className="welcome-section">
-        <h2>¡Bienvenidos Proveedores Marco, Mora, Valk!</h2>
+        <h2>¡Bienvenidos al Sistema Proveedores Eduardo, Marco, Valk!</h2>
         <p className="welcome-message">
           "Tu lugar confiable de piezas tecnológicas para computadoras. En nuestra empresa, 
           encontrarás una amplia selección de componentes de primera calidad para satisfacer 

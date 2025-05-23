@@ -1,8 +1,13 @@
 import api from './axios';
 
-export const getCategories = async () => {
-  const response = await api.get('/categorias');
-  return response.data.data; // Extraemos el array de categorías de data.data
+export const getCategories = async (page = 1, perPage = 6) => {
+  const response = await api.get('/categorias', {
+    params: {
+      page,
+      perPage 
+    }
+  });
+  return response.data;
 };
 
 export const createCategory = async (categoryData) => {

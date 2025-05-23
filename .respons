@@ -1,0 +1,307 @@
+GET HTTPs://mi_sitio.api/categorias
+{
+    "success": true,
+    "data": [
+        {
+            "idCategoria": 1,
+            "nombre": "ELECTRONICA 2",
+            "estado": true
+        },
+        {
+            "idCategoria": 2,
+            "nombre": "CATEGORIA 3",
+            "estado": false
+        },
+        {
+            "idCategoria": 3,
+            "nombre": "PRUEBA",
+            "estado": true
+        },
+        {
+            "idCategoria": 4,
+            "nombre": "NUEVA",
+            "estado": true
+        },
+        {
+            "idCategoria": 6,
+            "nombre": "XD",
+            "estado": false
+        },
+        {
+            "idCategoria": 7,
+            "nombre": "NEU",
+            "estado": true
+        }
+    ],
+    "pagination": {
+        "total": 12,
+        "pages": 2,
+        "currentPage": 1,
+        "perPage": 6
+    },
+    "message": "Categorías obtenidas correctamente"
+}
+POST http://localhost:3000/api/categorias
+{
+    "success": true,
+    "data": {
+        "idCategoria": 14,
+        "nombre": "NUEVA",
+        "estado": true
+    },
+    "message": "Categoría creada correctamente"
+}
+PUT http://localhost:3000/api/categorias/2
+{
+    "success": true,
+    "data": {
+        "idCategoria": 2,
+        "nombre": "CATEGORIA 3",
+        "estado": false
+    },
+    "message": "Categoría actualizada correctamente"
+}
+DELETE http://localhost:3000/api/categorias/2
+{
+    "success": true,
+    "message": "Categoría eliminada correctamente"
+}
+GET http://localhost:3000/api/proveedores
+{
+    "success": true,
+    "data": [
+        {
+            "idProveedor": 3,
+            "nombre": "Proveedor Ejemplo S.A.",
+            "direccion": "Calle Falsa 123, Ciudad Ejemplo",
+            "telefono": "+52 55 1234 5678",
+            "email": "contacto@proveedorejemplo.com",
+            "estado": true
+        },
+        {
+            "idProveedor": 4,
+            "nombre": "Proveedor Ejemplo S.A.",
+            "direccion": "Calle Falsa 123, Ciudad Ejemplo",
+            "telefono": "+52 55 1234 5678",
+            "email": "contacto@proveedorejemplo.com",
+            "estado": true
+        },
+        {
+            "idProveedor": 5,
+            "nombre": "Proveedor 3.",
+            "direccion": "Calle Falsa 123, Ciudad Ejemplo",
+            "telefono": "+52 55 1234 5678",
+            "email": "contacto@proveedorejemplo.com",
+            "estado": true
+        }
+    ],
+    "pagination": {
+        "total": 3,
+        "pages": 1,
+        "currentPage": 1,
+        "perPage": 10
+    },
+    "message": "Proveedores obtenidos correctamente"
+}
+POST http://localhost:3000/api/proveedores
+{
+    "success": true,
+    "data": {
+        "idProveedor": 5,
+        "nombre": "Proveedor 3.",
+        "direccion": "Calle Falsa 123, Ciudad Ejemplo",
+        "telefono": "+52 55 1234 5678",
+        "email": "contacto@proveedorejemplo.com",
+        "estado": true
+    },
+    "message": "Proveedor creado correctamente"
+}
+PUT http://localhost:3000/api/proveedores/3
+{
+    "success": true,
+    "data": {
+        "idProveedor": 2,
+        "nombre": "Proveedor Actualizado.",
+        "direccion": "Calle Falsa 123, Ciudad Ejemplo",
+        "telefono": "+52 55 1234 5678",
+        "email": "contacto@proveedorejemplo.com",
+        "estado": true
+    },
+    "message": "Proveedor actualizado correctamente"
+}
+DELETE http://localhost:3000/api/proveedores/3
+{
+    "success": true,
+    "message": "Proveedor eliminado correctamente"
+}
+GET http://localhost:3000/api/suministros
+{
+    "success": true,
+    "data": [
+        {
+            "idSuministro": 2,
+            "idProveedor": 4,
+            "fecha": "2025-05-23T00:00:00.000Z",
+            "monto": "15000.50",
+            "estado": true,
+            "proveedor": {
+                "idProveedor": 4,
+                "nombre": "Proveedor Ejemplo S.A."
+            }
+        }
+    ],
+    "pagination": {
+        "total": 1,
+        "pages": 1,
+        "currentPage": 1,
+        "perPage": 10
+    },
+    "message": "Suministros obtenidos correctamente"
+}
+POST http://localhost:3000/api/suministros
+{
+    "success": true,
+    "data": {
+        "idSuministro": 2,
+        "idProveedor": 4,
+        "fecha": "2025-05-23T00:00:00.000Z",
+        "monto": "15000.50",
+        "estado": true
+    },
+    "message": "Suministro creado correctamente"
+}
+PUT http://localhost:3000/api/suministros/1
+{
+    "success": true,
+    "data": {
+        "idSuministro": 1,
+        "idProveedor": 1,
+        "fecha": "2025-05-23T00:00:00.000Z",
+        "monto": 3000.5,
+        "estado": true
+    },
+    "message": "Suministro actualizado correctamente"
+}
+DELETE http://localhost:3000/api/suministros/1
+{
+    "success": true,
+    "message": "Suministro eliminado correctamente"
+}
+GET http://localhost:3000/api/piezas
+{
+    "success": true,
+    "data": [
+        {
+            "idPieza": 4,
+            "nombre": "nueva",
+            "color": "nuevo colir",
+            "precio": "3.00",
+            "idCategoria": 7,
+            "medida": "nueva medida",
+            "stock": 10,
+            "estado": true,
+            "categoria": {
+                "idCategoria": 7,
+                "nombre": "NEU"
+            }
+        },
+        {
+            "idPieza": 5,
+            "nombre": "otra",
+            "color": "xd",
+            "precio": "100.00",
+            "idCategoria": 1,
+            "medida": "qwe",
+            "stock": 34,
+            "estado": true,
+            "categoria": {
+                "idCategoria": 1,
+                "nombre": "ELECTRONICA 2"
+            }
+        },
+        {
+            "idPieza": 6,
+            "nombre": "haber",
+            "color": "azul",
+            "precio": "90.00",
+            "idCategoria": 4,
+            "medida": "Mediano",
+            "stock": 90,
+            "estado": true,
+            "categoria": {
+                "idCategoria": 4,
+                "nombre": "NUEVA"
+            }
+        },
+        {
+            "idPieza": 8,
+            "nombre": "Agregado post",
+            "color": "post",
+            "precio": "990.00",
+            "idCategoria": 2,
+            "medida": "chico",
+            "stock": 33,
+            "estado": true,
+            "categoria": {
+                "idCategoria": 2,
+                "nombre": "CATEGORIA 3"
+            }
+        },
+        {
+            "idPieza": 9,
+            "nombre": "Agregado post",
+            "color": "post",
+            "precio": "990.00",
+            "idCategoria": 2,
+            "medida": "chico",
+            "stock": 33,
+            "estado": true,
+            "categoria": {
+                "idCategoria": 2,
+                "nombre": "CATEGORIA 3"
+            }
+        }
+    ],
+    "pagination": {
+        "total": 5,
+        "pages": 1,
+        "currentPage": 1,
+        "perPage": 6
+    },
+    "message": "Piezas obtenidas correctamente"
+}
+POST http://localhost:3000/api/piezas
+{
+    "success": true,
+    "data": {
+        "idPieza": 9,
+        "nombre": "Agregado post",
+        "color": "post",
+        "precio": "990.00",
+        "idCategoria": 2,
+        "medida": "chico",
+        "stock": 33,
+        "estado": true
+    },
+    "message": "Pieza creada correctamente"
+}
+PUT http://localhost:3000/api/piezas/1
+{
+    "success": true,
+    "data": {
+        "idPieza": 4,
+        "nombre": "Actualziado post",
+        "color": "post",
+        "precio": "990.00",
+        "idCategoria": 2,
+        "medida": "chico",
+        "stock": 33,
+        "estado": true
+    },
+    "message": "Pieza actualizada correctamente"
+}
+DELETE http://localhost:3000/api/piezas/1
+{
+    "success": true,
+    "message": "Pieza eliminada correctamente"
+}
