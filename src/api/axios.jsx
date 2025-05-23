@@ -1,11 +1,11 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://provmc.42web.io/public/api', // URL base de la API
+  baseURL: 'https://api-prov-vd6y.onrender.com/api/', // URL base de la API
   headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json'
-  }
+  } 
 });
 
 // Interceptor para añadir token a las peticiones

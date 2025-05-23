@@ -21,6 +21,7 @@ export default function CategoriesPage() {
     queryKey: ['categories'],
     queryFn: getCategories
   });
+
   
   // Mutación para crear categoría
   const createMutation = useMutation({
@@ -126,7 +127,7 @@ export default function CategoriesPage() {
           </thead>
           <tbody>
             {categories
-            .filter(category => category.estado === 1)
+            .filter(category => category.estado === true)
             .map(category => (
               <tr key={category.idCategoria}>
                 <td>{category.idCategoria}</td>
