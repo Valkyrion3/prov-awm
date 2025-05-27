@@ -1,8 +1,9 @@
 // Estilos básicos
-body {
-  font-family: Arial, sans-serif;
+html, body {
   margin: 0;
   padding: 0;
+  height: 100%;
+  background-color: #190028; /* opcional, para que todo el body tenga el fondo */
 }
 
 .login-container {

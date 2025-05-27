@@ -27,20 +27,16 @@ export default function CategoriesPage() {
 
   return (
     <div className="categories-page">
-      <div className="category-form">
+      <div className="header-line">
+        <h2>Categorías</h2>
+        <button
+          onClick={() => navigate('/categorias/nueva')}
+          className="button"
+        >
+          Agregar
+        </button>
       </div>
-
       <div className="categories-table">
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-2xl font-bold">Categorías</h2>
-          <button
-            onClick={() => navigate('/categorias/nueva')}
-            className="button"
-          >
-            + Nueva Categoría
-          </button>
-        </div>
-
         <table>
           <thead>
             <tr>

@@ -24,10 +24,9 @@ export default function Layout() {
     <div className="app-layout">
       <nav className="sidebar">
         <div className="user-info">
-          <h3>Bienvenido {user?.name}</h3>
+          <h3>Bienvenido, {user?.name}</h3>
           <p>{user?.email}</p>
         </div>
-        
         <ul className="nav-links">
           <li>
             <Link to="/dashboard">Inicio</Link>
@@ -44,19 +43,18 @@ export default function Layout() {
           <li>
             <Link to="/suministros">Suministros</Link>
           </li>
-          <li>
-            <button 
-              onClick={() => {
-                localStorage.removeItem('auth_token');
-                navigate('/login');
-              }}
-            >
-              Cerrar sesión
-            </button>
-          </li>
         </ul>
+        <div className='logout-button'>
+          <button
+            onClick={() => {
+              localStorage.removeItem('auth_token');
+              navigate('/login');
+            }}
+          >
+            Cerrar sesión
+          </button>
+        </div>
       </nav>
-
       <main className="content">
         <Outlet />
       </main>
