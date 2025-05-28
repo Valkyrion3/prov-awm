@@ -6,11 +6,13 @@ import { useState } from 'react';
 export default function CategoriesPage() {
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
-  
+
   // Modificamos la query para aceptar parámetros de paginación
   const { data: response, isLoading, isError } = useQuery({
     queryKey: ['categories', currentPage],
     queryFn: () => getCategories(currentPage), // Pasamos la página actual
+    refetchOnMount: true,
+    refetchOnWindowFocus: true,
   });
 
   if (isLoading) return <p>Cargando categorías...</p>;
@@ -22,11 +24,11 @@ export default function CategoriesPage() {
     total: 0,
     pages: 1,
     currentPage: 1,
-    perPage: 7
+    perPage: 8
   };
 
   return (
-    <div className="categories-page">
+    <div className="catalog-page">
       <div className="header-line">
         <h2>Categorías</h2>
         <button
@@ -36,7 +38,7 @@ export default function CategoriesPage() {
           Agregar
         </button>
       </div>
-      <div className="categories-table">
+      <div className="catalog-table">
         <table>
           <thead>
             <tr>
@@ -68,36 +70,37 @@ export default function CategoriesPage() {
             ))}
           </tbody>
         </table>
-        
-        {/* Paginación usando la información del backend */}
-        {pagination.pages > 1 && (
-          <div className="pagination">
-            <button
-              onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
-              disabled={currentPage === 1}
-            >
-              Anterior
-            </button>
-            
-            {Array.from({ length: pagination.pages }, (_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentPage(index + 1)}
-                className={`page-button ${currentPage === index + 1 ? 'active' : ''}`}
-              >
-                {index + 1}
-              </button>
-            ))}
-            
-            <button
-              onClick={() => setCurrentPage(prev => Math.min(prev + 1, pagination.pages))}
-              disabled={currentPage === pagination.pages}
-            >
-              Siguiente
-            </button>
-          </div>
-        )}
       </div>
+
+      {pagination.pages > 1 && (
+        <div className="pagination">
+          <button
+            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+            disabled={currentPage === 1}
+            className="nav-button"
+          >
+            Anterior
+          </button>
+
+          {Array.from({ length: pagination.pages }, (_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentPage(index + 1)}
+              className={`page-button ${currentPage === index + 1 ? 'active' : ''}`}
+            >
+              {index + 1}
+            </button>
+          ))}
+
+          <button
+            onClick={() => setCurrentPage((prev) => Math.min(prev + 1, pagination.pages))}
+            disabled={currentPage === pagination.pages}
+            className="nav-button"
+          >
+            Siguiente
+          </button>
+        </div>
+      )}
     </div>
   );
 }
