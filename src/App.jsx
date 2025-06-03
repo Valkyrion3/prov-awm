@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useEffect } from 'react';
 import LoginPage from './pages/Login';
 import CategoriesPage from './pages/Categorias';
 import PiezasPage from './pages/PiezasPage';
@@ -13,6 +14,11 @@ import SuministrosForm from './pages/SuministrosForm';
 
 
 function App() {
+  useEffect(() => {
+    console.log('%c¡Alto ahí!', 'color: red; font-size: 32px; font-weight: bold;');
+    console.log('%cEsta consola es una herramienta para desarrolladores. Si alguien te pidió que pegues algo aquí, podrías estar siendo víctima de un fraude (Self-XSS).', 'font-size: 16px;');
+    console.log('%cNo pegues código que no comprendas.. /¿V?\..', 'color: orange; font-size: 18px; font-weight: bold;');
+  }, []);
   return (
     <BrowserRouter>
       <Routes>
